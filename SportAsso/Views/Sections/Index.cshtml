@@ -1,0 +1,148 @@
+﻿@model IEnumerable<SportAsso.Models.section>
+
+@{
+    ViewBag.Title = "Sections";
+}
+
+
+<!--Affichage admin et encadrant-->
+@if (User.IsInRole("encadrant"))
+{
+    {
+        ViewBag.Title = "Encadrant";
+    }
+    <section>
+        <h3> Mes sections</h3>
+        <hr />
+        @if (ViewBag.hasSection == "false")
+        {
+    <div class="row">
+        @foreach (var item in ViewBag.section)
+        {
+
+            <div class="col-md-4">
+                <h3 style="background-color: #243447; color: #1DA1F2; text-align: center; padding: 10px;">@SportAsso.Controllers.SectionsController.FindDisciplineNameById(item.discipline_id) | @item.section_nom</h3>
+                <p><i>@item.description</i></p>
+                <p>Encadrée par @SportAsso.Controllers.SectionsController.FindUserFullNameById(item.encadrant_id)</p>
+                <p><b>@SportAsso.Controllers.SectionsController.calculNbPLace(item) places</b> encore disponibles</p>
+                <p>Prix de la licence : <b>@item.prix €</b></p>
+                <p style="border: 1px solid black; text-align :center;">@Html.ActionLink("Voir mes séances", "Index", "Seances", new { id = item.section_id }, new { @class = "btn btn - default" })</p>
+            </div>
+        }
+    </div>
+        }
+        else
+        {
+            <p>Aucunes sections trouvées</p>
+        }
+
+        <hr />
+    </section>
+}
+else
+{
+    if (User.IsInRole("admin"))
+    {
+        <h2>Liste des sections</h2>
+
+        <p>
+            @Html.ActionLink("Nouvelle section", "Create")
+        </p>
+        <table class="table table-striped" >
+            <tr style="background-color: #a3a3a3; color: black;">
+                <th>
+                    @Html.DisplayNameFor(model => model.section_id)
+                </th>
+                <th>
+                    @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.discipline_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.encadrant_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.places_max)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nbParticipant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.prix)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.section_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.section_nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.discipline_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.encadrant_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.places_max)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nbParticipant)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prix)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.section_id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.section_id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.section_id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+    else
+    {
+
+        <h2>Toutes les sections pour la discipline @ViewBag.maDiscipline </h2>
+        <hr />
+
+        if (ViewBag.hasSection == "false")
+        {
+
+<div class="row">
+    @foreach (var item in ViewBag.section)
+    {
+
+        <div class="col-md-4">
+            <h3 style="background-color: #243447; color: #1DA1F2; text-align: center; padding: 10px;">@item.section_nom</h3>
+            <p><i>@item.description</i></p>
+            <p>Encadrée par @SportAsso.Controllers.SectionsController.FindUserFullNameById(item.encadrant_id)</p>
+            <p><b>@SportAsso.Controllers.SectionsController.calculNbPLace(item) places</b> encore disponibles</p>
+            <p>Prix de la licence : <b>@item.prix €</b></p>
+            <p style="border: 1px solid black; text-align :center;">@Html.ActionLink("Voir les séances", "Index", "Seances", new { id = item.section_id }, new { @class = "btn btn - default" })</p>
+        </div>
+
+
+    }
+
+</div>
+
+    }
+
+}
+}

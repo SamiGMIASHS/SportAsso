@@ -1,0 +1,82 @@
+﻿@model SportAsso.Models.section
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>section</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.section_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.section_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discipline_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discipline_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.section_nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.section_nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.encadrant_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.encadrant_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nbParticipant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nbParticipant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.places_max)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.places_max)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.section_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

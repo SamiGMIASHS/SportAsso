@@ -1,0 +1,153 @@
+﻿@model IEnumerable<SportAsso.Models.seance>
+
+@{
+    ViewBag.Title = "Séances";
+}
+
+
+<!--Affichage admin et encadrant-->
+@if (User.IsInRole("encadrant"))
+{
+    {
+        ViewBag.Title = "Encadrant";
+    }
+
+    <section>
+        <h3> Mes Séances </h3>
+        <hr />
+        @if (ViewBag.hasSeance == "false")
+        {
+            <div class="row">
+
+                @foreach (var item in ViewBag.seances)
+                {
+                    <div class="col-md-6">
+                        <p style="background-color: #dfdfdf;text-align: center;margin-bottom: 10px;padding: 3px;">@item.jour</p>
+                        <table class="table table-responsive">
+                            <tr style="text-align: center;">
+                                <td style="padding: 10px;">@SportAsso.Controllers.SeancesController.FindSectionNameById(item.section_id)</td>
+                                <td style="padding: 10px;"><b>@item.heure_debut - @item.heure_fin</b></td>
+                                <td style="padding: 10px;">@SportAsso.Controllers.SeancesController.FindLieuFullNameById(item.lieu_id)</td>
+                            </tr>
+                        </table>
+                        <p style="background-color: #dfdfdf;text-align: center;margin-top: 10px;padding: 3px;">@SportAsso.Controllers.SeancesController.FindUserFullNameById(item.encadrant_id)</p>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <p>Aucunes séances d'entrainement trouvées</p>
+        }
+
+        <hr />
+    </section>
+}
+
+else
+{
+    if (User.IsInRole("admin"))
+    {
+        <h2>Liste des séances</h2>
+
+        <p>
+            @Html.ActionLink("Nouvelle séance", "Create")
+        </p>
+        <table class="table table-striped">
+            <tr style="background-color: #a3a3a3; color: black;">
+                <th>
+                    @Html.DisplayNameFor(model => model.seance_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lieu_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.encadrant_id)
+                </th>
+                <th>
+                    @Html.ActionLink("Jour", "Index", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.heure_debut)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.heure_fin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.section_id)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.seance_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lieu_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.encadrant_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.jour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.heure_debut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.heure_fin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.section_id)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.seance_id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.seance_id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.seance_id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    else 
+    {
+        <h2>Toutes les séances d'entrainement pour la section @ViewBag.maSection</h2>
+        <hr />
+        <section>
+            @if (ViewBag.hasSeance == "false")
+            {
+
+                <div class="row">
+                    @foreach (var item in ViewBag.seances)
+
+                    {
+                        <div class="col-md-6">
+                            <p style="background-color: #dfdfdf;text-align: center;margin-bottom: 10px;padding: 3px;">@item.jour</p>
+                            <table class="table table-responsive">
+                                <tr style="text-align: center; ">
+                                    <td style="padding: 10px;">@SportAsso.Controllers.SeancesController.FindSectionNameById(item.section_id)</td>
+                                    <td style="padding: 10px;"><b>@item.heure_debut - @item.heure_fin</b></td>
+                                    <td style="padding: 10px;">@SportAsso.Controllers.SeancesController.FindLieuFullNameById(item.lieu_id)</td>
+                                </tr>
+                            </table>
+                            <p style="background-color: #dfdfdf;text-align: center;margin-top: 10px;padding: 3px;">@SportAsso.Controllers.SeancesController.FindUserFullNameById(item.encadrant_id)</p>
+                        </div>
+                    }
+                </div>
+
+
+            }
+            else
+            {
+                <p>Aucunes séances d'entrainement trouvées</p>
+            }
+        </section>
+    }
+
+}

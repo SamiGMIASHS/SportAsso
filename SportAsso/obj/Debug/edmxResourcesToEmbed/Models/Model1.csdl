@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbSportAssoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="discipline">
+    <Key>
+      <PropertyRef Name="discipline_id" />
+    </Key>
+    <Property Name="discipline_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="discipline_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="encadrant_id" Type="Int64" />
+    <NavigationProperty Name="utilisateur" Relationship="Self.FK__disciplin__encad__29572725" FromRole="discipline" ToRole="utilisateur" />
+    <NavigationProperty Name="section" Relationship="Self.FK__section__discipl__2C3393D0" FromRole="discipline" ToRole="section" />
+  </EntityType>
+  <EntityType Name="dossier">
+    <Key>
+      <PropertyRef Name="dossier_id" />
+    </Key>
+    <Property Name="dossier_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="utilisateur_id" Type="Int64" />
+    <Property Name="certificat_medical" Type="Boolean" />
+    <Property Name="fiche_renseignement" Type="Boolean" />
+    <Property Name="assurance" Type="Boolean" />
+    <Property Name="paiement" Type="Boolean" />
+    <Property Name="dossier_complet" Type="Boolean" />
+    <NavigationProperty Name="utilisateur" Relationship="Self.FK__dossier__dossier__267ABA7A" FromRole="dossier" ToRole="utilisateur" />
+  </EntityType>
+  <EntityType Name="lieu">
+    <Key>
+      <PropertyRef Name="lieu_id" />
+    </Key>
+    <Property Name="lieu_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="lieu_nom" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="adresse_lieu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="seance" Relationship="Self.FK__seance__lieu_id__37A5467C" FromRole="lieu" ToRole="seance" />
+  </EntityType>
+  <EntityType Name="participe">
+    <Key>
+      <PropertyRef Name="participant_id" />
+    </Key>
+    <Property Name="participant_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="utilisateur_id" Type="Int64" />
+    <Property Name="section_id" Type="Int64" />
+    <NavigationProperty Name="section" Relationship="Self.FK__participe__secti__30F848ED" FromRole="participe" ToRole="section" />
+    <NavigationProperty Name="utilisateur" Relationship="Self.FK__participe__utili__300424B4" FromRole="participe" ToRole="utilisateur" />
+  </EntityType>
+  <EntityType Name="seance">
+    <Key>
+      <PropertyRef Name="seance_id" />
+    </Key>
+    <Property Name="seance_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="lieu_id" Type="Int64" />
+    <Property Name="encadrant_id" Type="Int64" />
+    <Property Name="jour" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="heure_debut" Type="Time" Precision="7" />
+    <Property Name="heure_fin" Type="Time" Precision="7" />
+    <Property Name="section_id" Type="Int64" />
+    <NavigationProperty Name="lieu" Relationship="Self.FK__seance__lieu_id__37A5467C" FromRole="seance" ToRole="lieu" />
+    <NavigationProperty Name="utilisateur" Relationship="Self.FK__seance__encadran__36B12243" FromRole="seance" ToRole="utilisateur" />
+    <NavigationProperty Name="section" Relationship="Self.FK__seance__section___35BCFE0A" FromRole="seance" ToRole="section" />
+  </EntityType>
+  <EntityType Name="section">
+    <Key>
+      <PropertyRef Name="section_id" />
+    </Key>
+    <Property Name="section_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="discipline_id" Type="Int64" />
+    <Property Name="section_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="encadrant_id" Type="Int64" />
+    <Property Name="nbParticipant" Type="Int32" />
+    <Property Name="places_max" Type="Int32" />
+    <Property Name="prix" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="discipline" Relationship="Self.FK__section__discipl__2C3393D0" FromRole="section" ToRole="discipline" />
+    <NavigationProperty Name="participe" Relationship="Self.FK__participe__secti__30F848ED" FromRole="section" ToRole="participe" />
+    <NavigationProperty Name="seance" Relationship="Self.FK__seance__section___35BCFE0A" FromRole="section" ToRole="seance" />
+    <NavigationProperty Name="utilisateur" Relationship="Self.FK__section__encadra__2D27B809" FromRole="section" ToRole="utilisateur" />
+  </EntityType>
+  <EntityType Name="utilisateur">
+    <Key>
+      <PropertyRef Name="utilisateur_id" />
+    </Key>
+    <Property Name="utilisateur_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="adresse" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="telephone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="role_utilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="discipline" Relationship="Self.FK__disciplin__encad__29572725" FromRole="utilisateur" ToRole="discipline" />
+    <NavigationProperty Name="dossier" Relationship="Self.FK__dossier__dossier__267ABA7A" FromRole="utilisateur" ToRole="dossier" />
+    <NavigationProperty Name="participe" Relationship="Self.FK__participe__utili__300424B4" FromRole="utilisateur" ToRole="participe" />
+    <NavigationProperty Name="seance" Relationship="Self.FK__seance__encadran__36B12243" FromRole="utilisateur" ToRole="seance" />
+    <NavigationProperty Name="section" Relationship="Self.FK__section__encadra__2D27B809" FromRole="utilisateur" ToRole="section" />
+  </EntityType>
+  <Association Name="FK__disciplin__encad__29572725">
+    <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="0..1" />
+    <End Role="discipline" Type="Self.discipline" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="utilisateur">
+        <PropertyRef Name="utilisateur_id" />
+      </Principal>
+      <Dependent Role="discipline">
+        <PropertyRef Name="encadrant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__section__discipl__2C3393D0">
+    <End Role="discipline" Type="Self.discipline" Multiplicity="0..1" />
+    <End Role="section" Type="Self.section" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="discipline">
+        <PropertyRef Name="discipline_id" />
+      </Principal>
+      <Dependent Role="section">
+        <PropertyRef Name="discipline_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__dossier__dossier__267ABA7A">
+    <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="0..1" />
+    <End Role="dossier" Type="Self.dossier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="utilisateur">
+        <PropertyRef Name="utilisateur_id" />
+      </Principal>
+      <Dependent Role="dossier">
+        <PropertyRef Name="utilisateur_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__seance__lieu_id__37A5467C">
+    <End Role="lieu" Type="Self.lieu" Multiplicity="0..1" />
+    <End Role="seance" Type="Self.seance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lieu">
+        <PropertyRef Name="lieu_id" />
+      </Principal>
+      <Dependent Role="seance">
+        <PropertyRef Name="lieu_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__participe__secti__30F848ED">
+    <End Role="section" Type="Self.section" Multiplicity="0..1" />
+    <End Role="participe" Type="Self.participe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="section">
+        <PropertyRef Name="section_id" />
+      </Principal>
+      <Dependent Role="participe">
+        <PropertyRef Name="section_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__participe__utili__300424B4">
+    <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="0..1" />
+    <End Role="participe" Type="Self.participe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="utilisateur">
+        <PropertyRef Name="utilisateur_id" />
+      </Principal>
+      <Dependent Role="participe">
+        <PropertyRef Name="utilisateur_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__seance__encadran__36B12243">
+    <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="0..1" />
+    <End Role="seance" Type="Self.seance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="utilisateur">
+        <PropertyRef Name="utilisateur_id" />
+      </Principal>
+      <Dependent Role="seance">
+        <PropertyRef Name="encadrant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__seance__section___35BCFE0A">
+    <End Role="section" Type="Self.section" Multiplicity="0..1" />
+    <End Role="seance" Type="Self.seance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="section">
+        <PropertyRef Name="section_id" />
+      </Principal>
+      <Dependent Role="seance">
+        <PropertyRef Name="section_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__section__encadra__2D27B809">
+    <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="0..1" />
+    <End Role="section" Type="Self.section" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="utilisateur">
+        <PropertyRef Name="utilisateur_id" />
+      </Principal>
+      <Dependent Role="section">
+        <PropertyRef Name="encadrant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbSportAssoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="discipline" EntityType="Self.discipline" />
+    <EntitySet Name="dossier" EntityType="Self.dossier" />
+    <EntitySet Name="lieu" EntityType="Self.lieu" />
+    <EntitySet Name="participe" EntityType="Self.participe" />
+    <EntitySet Name="seance" EntityType="Self.seance" />
+    <EntitySet Name="section" EntityType="Self.section" />
+    <EntitySet Name="utilisateur" EntityType="Self.utilisateur" />
+    <AssociationSet Name="FK__disciplin__encad__29572725" Association="Self.FK__disciplin__encad__29572725">
+      <End Role="utilisateur" EntitySet="utilisateur" />
+      <End Role="discipline" EntitySet="discipline" />
+    </AssociationSet>
+    <AssociationSet Name="FK__section__discipl__2C3393D0" Association="Self.FK__section__discipl__2C3393D0">
+      <End Role="discipline" EntitySet="discipline" />
+      <End Role="section" EntitySet="section" />
+    </AssociationSet>
+    <AssociationSet Name="FK__dossier__dossier__267ABA7A" Association="Self.FK__dossier__dossier__267ABA7A">
+      <End Role="utilisateur" EntitySet="utilisateur" />
+      <End Role="dossier" EntitySet="dossier" />
+    </AssociationSet>
+    <AssociationSet Name="FK__seance__lieu_id__37A5467C" Association="Self.FK__seance__lieu_id__37A5467C">
+      <End Role="lieu" EntitySet="lieu" />
+      <End Role="seance" EntitySet="seance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__participe__secti__30F848ED" Association="Self.FK__participe__secti__30F848ED">
+      <End Role="section" EntitySet="section" />
+      <End Role="participe" EntitySet="participe" />
+    </AssociationSet>
+    <AssociationSet Name="FK__participe__utili__300424B4" Association="Self.FK__participe__utili__300424B4">
+      <End Role="utilisateur" EntitySet="utilisateur" />
+      <End Role="participe" EntitySet="participe" />
+    </AssociationSet>
+    <AssociationSet Name="FK__seance__encadran__36B12243" Association="Self.FK__seance__encadran__36B12243">
+      <End Role="utilisateur" EntitySet="utilisateur" />
+      <End Role="seance" EntitySet="seance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__seance__section___35BCFE0A" Association="Self.FK__seance__section___35BCFE0A">
+      <End Role="section" EntitySet="section" />
+      <End Role="seance" EntitySet="seance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__section__encadra__2D27B809" Association="Self.FK__section__encadra__2D27B809">
+      <End Role="utilisateur" EntitySet="utilisateur" />
+      <End Role="section" EntitySet="section" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

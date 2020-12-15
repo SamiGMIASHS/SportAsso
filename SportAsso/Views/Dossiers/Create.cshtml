@@ -1,0 +1,332 @@
+﻿@model SportAsso.Models.dossier
+
+<script type="text/javascript">
+    function random_function() {
+        var a = document.getElementById("input").value;
+        if (a === "Basketball") {
+            var arr = ["U13-Mixtes", "U15-Garçons", "U18-Filles"];
+        }
+        else if (a === "Football") {
+            var arr = ["U15-Filles", "U18-Garçons", "Loisirs"];
+        }
+        else if (a === "Tennis") {
+            var arr = ["Compétitions-Garçons", "Compétitions-Filles"];
+        }
+
+        var string = "";
+
+        for (i = 0; i < arr.length; i++) {
+            string = string + "<option value=" + arr[i] + ">" + arr[i] + "</option>";
+        }
+        document.getElementById("output").innerHTML = string;
+    }
+
+    function afficheMontant() {
+        var a = document.getElementById("output").value;
+        if (a === "U13-Mixtes") {
+            var arr = "80";
+        }
+        else if (a === "U15-Garçons") {
+            var arr = "100";
+        }
+        else if (a === "U18-Filles") {
+            var arr = "125";
+        }
+        else if (a === "U15-Filles") {
+            var arr = "100";
+        }
+        else if (a === "U18-Garçons") {
+            var arr = "125";
+        }
+        else if (a === "Loisirs") {
+            var arr = "70";
+        }
+        else if (a === "Compétitions-Garçons") {
+            var arr = "120";
+        }
+        else if (a === "Compétitions-Filles") {
+            var arr = "120"
+        }
+
+        var string = "";
+
+        for (i = 0; i < arr.length; i++) {
+            string = string + arr[i];
+        }
+        document.getElementById("output2").innerHTML = string;
+    }
+
+    function refreshPage() {
+        window.location.reload();
+        alert("Votre dossier a été envoyé à l'association SportAsso !");
+    }
+
+</script>
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+@if (User.IsInRole("admin"))
+{
+    <h2>Create</h2>
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>dossier</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.utilisateur_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.utilisateur_id, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.utilisateur_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.certificat_medical, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.certificat_medical, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.certificat_medical, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fiche_renseignement, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fiche_renseignement, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fiche_renseignement, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.assurance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.assurance, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.assurance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.paiement, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.paiement, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.paiement, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.dossier_complet, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.dossier_complet, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.dossier_complet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+
+
+
+else
+{
+  
+    <h3 style="display: inline-block; background-color: #243447; color: #1DA1F2; padding: 10px; width: 100%;">Formulaire d'inscription</h3>
+
+    <form style="margin-top: 20px;">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputNom">Nom</label>
+                <input type="text" class="form-control" id="inputNom" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPrenom">Prénom</label>
+                <input type="text" class="form-control" id="inputPrenom" placeholder="">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Email</label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputTel">Téléphone</label>
+                <input type="tel" class="form-control" id="inputTel" placeholder="ex: 0466853274">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="input">Disciplines</label>
+            <select id="input" class="form-control" onchange="random_function()">
+                <option disabled selected>Sélectionnez une discipline</option>
+                <option>Basketball</option>
+                <option>Football</option>
+                <option>Tennis</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputState">Sections</label>
+            <select id="output" class="form-control" onclick="afficheMontant()">
+            </select>
+        </div>
+    </form>
+
+    <h3 style="display: inline-block; background-color: #243447; color: #1DA1F2; padding: 10px; width: 100%;">Documents à fournir</h3>
+    <form style="margin-top: 20px;">
+        <div class="form-group col-md-4">
+            <label class="btn btn-default">
+                Fiche de rensignement <input type="file" hidden>
+            </label>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="btn btn-default">
+                Certificat médical <input type="file" hidden>
+            </label>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="btn btn-default">
+                Assurance <input type="file" hidden>
+            </label>
+        </div>
+    </form>
+
+    <h3 style="display: inline-block; background-color: #243447; color: #1DA1F2; padding: 10px; width: 100%;">Paiement</h3>
+    <div style="margin-top: 20px; padding: 10px;"><h2 style="text-align: center;">Montant de la transaction à payer : <b id="output2"></b> €</h2></div>
+    <br />
+    <form>
+        <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
+        <div class='form-row'>
+            <div class='col-xs-4 form-group required'>
+                <label class='control-label'>Nom sur votre carte</label>
+                <input class='form-control' size='4' type='text'>
+            </div>
+
+            <div class='col-xs-8 form-group card required'>
+                <label class='control-label'>Numéro de votre carte</label>
+                <input autocomplete='off' class='form-control card-number' size='20' type='text'>
+            </div>
+
+        </div>
+
+        <div class='form-row'>
+
+            <div class='col-md-1 form-group expiration required'>
+                <label class='control-label'>Expiration</label>
+                <input class='form-control card-expiry-month' placeholder='Mois' size='2' type='text'>
+            </div>
+            <div class='col-md-2 form-group expiration required'>
+                <label class='control-label'> </label>
+                <input class='form-control card-expiry-year' placeholder='Année' size='4' type='text'>
+            </div>
+            <div class="col-md-1 form-group">
+
+            </div>
+            <div class='col-xs-8 form-group cvc required'>
+                <label class='control-label'>CVC</label>
+                <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+            </div>
+        </div>
+    </form>
+
+    <h3 style="display: inline-block; background-color: #243447; color: #1DA1F2; padding: 10px; width: 100%;">Validation sous forme booléen</h3>
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+
+        <div class="form-horizontal" style="margin-top: 20px;">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.utilisateur_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.utilisateur_id, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.utilisateur_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.certificat_medical, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.certificat_medical, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.certificat_medical, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fiche_renseignement, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fiche_renseignement, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fiche_renseignement, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.assurance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.assurance, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.assurance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.paiement, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.paiement, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.paiement, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.dossier_complet, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.dossier_complet, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.dossier_complet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Valider le dossier d'inscription" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

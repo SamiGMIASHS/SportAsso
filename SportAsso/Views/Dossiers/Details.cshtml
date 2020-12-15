@@ -1,0 +1,74 @@
+﻿@model SportAsso.Models.dossier
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>dossier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dossier_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dossier_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.utilisateur_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.utilisateur_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.certificat_medical)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.certificat_medical)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fiche_renseignement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fiche_renseignement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.assurance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.assurance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paiement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paiement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dossier_complet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dossier_complet)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.dossier_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

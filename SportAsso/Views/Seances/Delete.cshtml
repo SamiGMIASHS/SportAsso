@@ -1,0 +1,80 @@
+﻿@model SportAsso.Models.seance
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>seance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.seance_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seance_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lieu_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lieu_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.encadrant_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.encadrant_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.heure_debut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heure_debut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.heure_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heure_fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.section_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.section_id)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

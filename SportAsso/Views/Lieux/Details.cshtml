@@ -1,0 +1,42 @@
+﻿@model SportAsso.Models.lieu
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>lieu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lieu_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lieu_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lieu_nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lieu_nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adresse_lieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adresse_lieu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.lieu_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

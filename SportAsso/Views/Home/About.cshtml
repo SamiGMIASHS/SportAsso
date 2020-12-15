@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Présentation de SportAsso";
+}
+<h2>@ViewBag.Title</h2>
+
+<h3>C'EST QUOI ?</h3>
+<div>
+    Tout au long de l’année, SportAsso des séances sportives payantes encadrées par des éducateurs diplômés.
+    <br />
+    Dès 10 ans, les jeunes du territoire peuvent s’inscrire aux programmes sportifs de l’Association :
+    Basketball, Football et Tennis.
+</div>
+
+<h3>POUR QUI ?</h3>
+<div>
+    Pour tous les jeunes, à partir de 10 ans, qui souhaitent pratiquer des activités sportives dans l’un de nos centres sportifs.
+    <br />
+    En proposant un encadrement de qualité aux enfants, de 10 à 18 ans, lors des séances sportives, les éducateurs sportifs transmettent aux jeunes des valeurs indispensables à leur insertion sociale et professionnelle future :
+
+    Engagement, Respect, Assiduité, Ponctualité, Esprit d’équipe…
+</div>
+
+<h3>COMMENT S'INSCRIRE AU PROGRAMME ?</h3>
+<div>
+    Depuis la rentrée sportive 2020, les inscriptions à nos programmes sportifs se font en ligne. 
+    <br />
+    En créant un compte, vous pourrez remplir un formulaire qui vous permettra de devenir adhérent à notre association.
+</div>
+<br />
+@Html.ActionLink("Rejoignez-nous", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })

@@ -1,0 +1,74 @@
+﻿@model SportAsso.Models.seance
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>seance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.seance_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seance_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lieu_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lieu_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.encadrant_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.encadrant_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.heure_debut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heure_debut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.heure_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heure_fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.section_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.section_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.seance_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eb5f4c30c6ea4958897f0bab33686797" Name="Diagram1">
+        <EntityTypeShape EntityType="dbSportAssoModel.discipline" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSportAssoModel.dossier" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSportAssoModel.lieu" Width="1.5" PointX="8.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSportAssoModel.participe" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSportAssoModel.seance" Width="1.5" PointX="10.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSportAssoModel.section" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSportAssoModel.utilisateur" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="dbSportAssoModel.FK__disciplin__encad__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSportAssoModel.FK__section__discipl__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSportAssoModel.FK__dossier__dossier__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSportAssoModel.FK__seance__lieu_id__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSportAssoModel.FK__participe__secti__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSportAssoModel.FK__participe__utili__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSportAssoModel.FK__seance__encadran__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSportAssoModel.FK__seance__section___35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSportAssoModel.FK__section__encadra__2D27B809" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

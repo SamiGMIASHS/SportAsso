@@ -1,0 +1,163 @@
+﻿@model IEnumerable<SportAsso.Models.discipline>
+
+@{
+    ViewBag.Title = "Disciplines";
+}
+
+<!--Affichage admin et encadrant-->
+@if (User.IsInRole("encadrant"))
+{
+
+    <section>
+        <h3> Mes disciplines</h3>
+        <hr />
+        @if (ViewBag.hasDiscipline == "false")
+        {
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        <bold> Nom </bold>
+                    </th>
+                    <th>
+                        <bold> Description </bold>
+                    </th>
+                    <th>
+                        <bold>Encadrant</bold>
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in ViewBag.discipline)
+                {
+                    <tr>
+                        <td>
+                            @item.discipline_nom
+                        </td>
+                        <td>
+                            @item.description
+                        </td>
+                        <td>
+                            @SportAsso.Controllers.DisciplinesController.GetUserFullNameByLogin(item.utilisateur.login)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Voir les sections", "Index", "Sections", new { id = item.discipline_id }, new { @class = "btn btn - default" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>Vous êtes affectés à aucune discipline.</p>
+        }
+
+    </section>
+
+}
+else
+{
+    if (User.IsInRole("admin"))
+    {
+        <h2>Liste des disciplines</h2>
+        <p>
+            @Html.ActionLink("Nouvelle discipline", "Create")
+        </p>
+        <table class="table table-striped">
+            <tr style="background-color: #a3a3a3; color: black;">
+                <th>
+                    @Html.DisplayNameFor(model => model.discipline_id)
+                </th>
+                <th>
+                    @Html.ActionLink("Nom", "Index", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.encadrant_id)
+                </th>
+                <th>
+                    Nom encadrant
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.discipline_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.discipline_nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.encadrant_id)
+                    </td>
+                    <td>
+                        @SportAsso.Controllers.DisciplinesController.GetUserFullNameByLogin(item.utilisateur.login)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.discipline_id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.discipline_id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.discipline_id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+
+    else
+    {
+        <h2>Les activités proposées par SportAsso</h2>
+        <hr />
+
+
+
+        if (ViewBag.hasDiscipline == "false")
+        {
+
+            
+                foreach (var item in ViewBag.disciplineALL)
+                {
+
+
+                <div style="width: 50%; margin: auto;">
+                    <h3 style="background-color:#243447; color: #1DA1F2; padding: 10px;">@item.discipline_nom</h3>
+
+                    @if (item.discipline_nom == "Basketball")
+                    {
+                        <img src="https://basketformation.com/wp-content/uploads/2020/04/entrainement-basket.jpg" alt="Sport" height="50%" width="100%" />
+                    }
+                    @if (item.discipline_nom == "Football")
+                    {
+                        <img src="https://www.ertheo.com/blog/wp-content/uploads/2016/06/Stage-foot-Manchester-City-1024x648.jpg" alt="Sport" height="50%" width="100%" />
+                    }
+                    @if (item.discipline_nom == "Tennis")
+                    {
+                        <img src="https://www.ville-hazebrouck.fr/wp-content/uploads/2019/08/enfants-qui-jouent-au-tennis.jpg" alt="Sport" height="50%" width="100%" />
+                    }
+                    @if (item.discipline_nom == "Natation")
+                    {
+                        <img src="https://www.cnbrive.fr/media/uploaded/sites/11964/evenement/5d9c790e5b6ca_natation11.jpg" alt="Sport" height="50%" width="100%" />
+                    }
+
+                    <p style="margin-top:5px;"><i>@item.description</i></p>
+
+                    <p>Encadrant : @SportAsso.Controllers.DisciplinesController.GetUserFullNameByLogin(item.utilisateur.login)</p>
+
+                    <p style="border: 1px solid black; text-align : center;">@Html.ActionLink("Voir les sections", "Index", "Sections", new { id = item.discipline_id }, new { @class = "btn btn - default" })</p>
+                </div>
+            
+
+        }
+
+      
+
+    }
+}
+}
